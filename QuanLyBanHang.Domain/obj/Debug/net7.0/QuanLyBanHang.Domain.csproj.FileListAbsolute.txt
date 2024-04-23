@@ -1,0 +1,14 @@
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\bin\Debug\net7.0\QuanLyBanHang.Domain.deps.json
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\bin\Debug\net7.0\QuanLyBanHang.Domain.runtimeconfig.json
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\bin\Debug\net7.0\QuanLyBanHang.Domain.dll
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\bin\Debug\net7.0\QuanLyBanHang.Domain.pdb
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\obj\Debug\net7.0\QuanLyBanHang.Domain.csproj.AssemblyReference.cache
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\obj\Debug\net7.0\QuanLyBanHang.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\obj\Debug\net7.0\QuanLyBanHang.Domain.AssemblyInfoInputs.cache
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\obj\Debug\net7.0\QuanLyBanHang.Domain.AssemblyInfo.cs
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\obj\Debug\net7.0\QuanLyBanHang.Domain.csproj.CoreCompileInputs.cache
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\obj\Debug\net7.0\QuanLyBanHang.Domain.dll
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\obj\Debug\net7.0\refint\QuanLyBanHang.Domain.dll
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\obj\Debug\net7.0\QuanLyBanHang.Domain.pdb
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\obj\Debug\net7.0\QuanLyBanHang.Domain.genruntimeconfig.cache
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Domain\obj\Debug\net7.0\ref\QuanLyBanHang.Domain.dll

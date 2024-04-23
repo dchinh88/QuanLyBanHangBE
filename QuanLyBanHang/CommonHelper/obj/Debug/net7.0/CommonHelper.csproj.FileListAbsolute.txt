@@ -1,0 +1,15 @@
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\bin\Debug\net7.0\CommonHelper.deps.json
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\bin\Debug\net7.0\CommonHelper.dll
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\bin\Debug\net7.0\CommonHelper.pdb
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\bin\Debug\net7.0\QuanLyBanHang.Domain.dll
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\bin\Debug\net7.0\QuanLyBanHang.Domain.pdb
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\obj\Debug\net7.0\CommonHelper.csproj.AssemblyReference.cache
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\obj\Debug\net7.0\CommonHelper.GeneratedMSBuildEditorConfig.editorconfig
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\obj\Debug\net7.0\CommonHelper.AssemblyInfoInputs.cache
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\obj\Debug\net7.0\CommonHelper.AssemblyInfo.cs
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\obj\Debug\net7.0\CommonHelper.csproj.CoreCompileInputs.cache
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\obj\Debug\net7.0\CommonHelper.csproj.CopyComplete
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\obj\Debug\net7.0\CommonHelper.dll
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\obj\Debug\net7.0\refint\CommonHelper.dll
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\obj\Debug\net7.0\CommonHelper.pdb
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang\CommonHelper\obj\Debug\net7.0\ref\CommonHelper.dll

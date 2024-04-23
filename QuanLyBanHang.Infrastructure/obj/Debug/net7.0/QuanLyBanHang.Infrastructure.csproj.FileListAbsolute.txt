@@ -1,0 +1,17 @@
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\bin\Debug\net7.0\QuanLyBanHang.Infrastructure.deps.json
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\bin\Debug\net7.0\QuanLyBanHang.Infrastructure.runtimeconfig.json
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\bin\Debug\net7.0\QuanLyBanHang.Infrastructure.dll
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\bin\Debug\net7.0\QuanLyBanHang.Infrastructure.pdb
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\bin\Debug\net7.0\QuanLyBanHang.Domain.dll
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\bin\Debug\net7.0\QuanLyBanHang.Domain.pdb
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\obj\Debug\net7.0\QuanLyBanHang.Infrastructure.csproj.AssemblyReference.cache
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\obj\Debug\net7.0\QuanLyBanHang.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\obj\Debug\net7.0\QuanLyBanHang.Infrastructure.AssemblyInfoInputs.cache
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\obj\Debug\net7.0\QuanLyBanHang.Infrastructure.AssemblyInfo.cs
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\obj\Debug\net7.0\QuanLyBanHang.Infrastructure.csproj.CoreCompileInputs.cache
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\obj\Debug\net7.0\QuanLyBanHang.Infrastructure.csproj.CopyComplete
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\obj\Debug\net7.0\QuanLyBanHang.Infrastructure.dll
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\obj\Debug\net7.0\refint\QuanLyBanHang.Infrastructure.dll
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\obj\Debug\net7.0\QuanLyBanHang.Infrastructure.pdb
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\obj\Debug\net7.0\QuanLyBanHang.Infrastructure.genruntimeconfig.cache
+D:\Tài liệu\Kì 8\Đồ_án\QuanLyBanHang.Infrastructure\obj\Debug\net7.0\ref\QuanLyBanHang.Infrastructure.dll
