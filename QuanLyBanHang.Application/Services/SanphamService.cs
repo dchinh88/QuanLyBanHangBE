@@ -24,6 +24,7 @@ namespace QuanLyBanHang.Application.Services
         
         public bool AddSanpham(SanphamDTO dto)
         {
+            dto.createdAt = DateTime.Now;
             return sanpham.Add(mapper.Map<Sanpham>(dto));
         }
 
@@ -44,6 +45,7 @@ namespace QuanLyBanHang.Application.Services
 
         public bool UpdateSanpham(SanphamDTO dto)
         {
+            dto.updatedAt = DateTime.Now;
             return sanpham.Update(mapper.Map<Sanpham>(dto));
         }
     }

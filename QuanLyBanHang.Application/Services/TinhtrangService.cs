@@ -23,6 +23,7 @@ namespace QuanLyBanHang.Application.Services
 
         public bool AddTinhtrang(TinhtrangDTO dto)
         {
+            dto.createdAt = DateTime.Now;
             return tinhtrang.Add(mapper.Map<Tinhtrang>(dto));
         }
 
@@ -43,6 +44,7 @@ namespace QuanLyBanHang.Application.Services
 
         public bool UpdateTinhtrang(TinhtrangDTO dto)
         {
+            dto.updatedAt = DateTime.Now;
             return tinhtrang.Update(mapper.Map<Tinhtrang>(dto));
         }
     }

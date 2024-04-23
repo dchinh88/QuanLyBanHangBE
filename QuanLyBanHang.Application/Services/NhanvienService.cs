@@ -12,6 +12,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
+using QuanLyBanHang.Application.Common;
+using QuanLyBanHang.Application.Query;
 
 namespace QuanLyBanHang.Application.Services
 {
@@ -40,9 +42,22 @@ namespace QuanLyBanHang.Application.Services
             return nhanvien.Delete(id);
         }
 
-        public List<NhanvienDTO> GetAllNhanvien()
+        public List<NhanvienDTO> GetAllNhanvien_NoQuery()
         {
             return mapper.Map<List<NhanvienDTO>>(nhanvien.GetAll());
+        }
+        public PageListResult<NhanvienDTO> GetAllNhanvien(NhanvienQuery? query)
+        {
+            int begin = (query.page * query.limit) - query.limit;
+            var list = mapper.Map<List<NhanvienDTO>>(nhanvien.GetAll());
+            /*if(query.keyWord != string.Empty)
+            {
+                list = list.Where(x => x.)
+            }*/
+            var resulteModel = new PageListResult<NhanvienDTO>();
+            resulteModel.items = list.Skip(begin).Take(query.limit).ToList();
+            resulteModel.totalItems = list.Count;
+            return resulteModel;
         }
 
         public NhanvienDTO GetNhanvienById(int id)

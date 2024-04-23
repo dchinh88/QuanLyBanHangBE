@@ -7,6 +7,7 @@ using System;
 using System.Security.Cryptography;
 using QuanLyBanHang.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
+using QuanLyBanHang.Application.Query;
 
 namespace QuanLyBanHang.API.Controllers
 {
@@ -20,9 +21,14 @@ namespace QuanLyBanHang.API.Controllers
             this.nhanvienService = nhanvienService;
         }
         [HttpGet]
-        public IActionResult GetAllNhanvien()
+        public IActionResult GetAllNhanvien([FromQuery] NhanvienQuery query)
         {
-            return Ok(nhanvienService.GetAllNhanvien());
+            return Ok(nhanvienService.GetAllNhanvien(query));
+        }
+        [HttpGet("AllNhanVien")]
+        public IActionResult GetAllNhanvien_NoQuery()
+        {
+            return Ok(nhanvienService.GetAllNhanvien_NoQuery());
         }
         [HttpGet("{id:int}")]
         public IActionResult GetNhanvienById(int id) 

@@ -24,6 +24,7 @@ namespace QuanLyBanHang.Application.Services
         
         public bool AddDonhang(DonhangDTO dto)
         {
+            dto.createdAt = DateTime.Now;
             return donhang.Add(mapper.Map<Donhang>(dto));
         }
 
@@ -44,6 +45,7 @@ namespace QuanLyBanHang.Application.Services
 
         public bool UpdateDonhang(DonhangDTO dto)
         {
+            dto.updatedAt = DateTime.Now;
             return donhang.Update(mapper.Map<Donhang>(dto));
         }
     }

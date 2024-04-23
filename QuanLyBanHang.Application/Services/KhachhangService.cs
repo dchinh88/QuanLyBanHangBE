@@ -23,6 +23,7 @@ namespace QuanLyBanHang.Application.Services
 
         public bool AddKhachhang(KhachhangDTO dto)
         {
+            dto.createdAt = DateTime.Now;
             return khachhang.Add(mapper.Map<Khachhang>(dto));
         }
 
@@ -43,6 +44,7 @@ namespace QuanLyBanHang.Application.Services
 
         public bool UpdateKhachhang(KhachhangDTO dto)
         {
+            dto.updatedAt = DateTime.Now;
             return khachhang.Update(mapper.Map<Khachhang>(dto));
         }
     }

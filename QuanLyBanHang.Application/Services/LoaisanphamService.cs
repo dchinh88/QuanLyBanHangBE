@@ -23,6 +23,7 @@ namespace QuanLyBanHang.Application.Services
 
         public bool AddLoaisanpham(LoaisanphamDTO dto)
         {
+            dto.createdAt = DateTime.Now;
             return loaisanpham.Add(mapper.Map<Loaisanpham>(dto));
         }
 
@@ -43,6 +44,7 @@ namespace QuanLyBanHang.Application.Services
 
         public bool UpdateLoaisanpham(LoaisanphamDTO dto)
         {
+            dto.updatedAt = DateTime.Now;
             return loaisanpham.Update(mapper.Map<Loaisanpham>(dto));
         }
     }

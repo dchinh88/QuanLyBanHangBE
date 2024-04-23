@@ -23,6 +23,7 @@ namespace QuanLyBanHang.Application.Services
 
         public bool AddChitietphieumuahang(ChitietphieumuahangDTO dto)
         {
+            dto.createdAt = DateTime.Now;
             return chitietphieumuahang.Add(mapper.Map<Chitietphieumuahang>(dto));
         }
 
@@ -43,6 +44,7 @@ namespace QuanLyBanHang.Application.Services
 
         public bool UpdateChitietphieumuahang(ChitietphieumuahangDTO dto)
         {
+            dto.updatedAt = DateTime.Now;
             return chitietphieumuahang.Update(mapper.Map<Chitietphieumuahang>(dto));
         }
     }
