@@ -1,4 +1,6 @@
-﻿using QuanLyBanHang.Application.DTO;
+﻿using QuanLyBanHang.Application.Common;
+using QuanLyBanHang.Application.DTO;
+using QuanLyBanHang.Application.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,8 @@ namespace QuanLyBanHang.Application.Interface
 {
     public interface ISanPhamService
     {
-        List<SanphamDTO> GetAllSanpham();
+        List<SanphamDTO> GetAllSanpham_NoQuery();
+        PageListResult<SanphamDTO> GetAllSanpham(SanphamQuery query);
         SanphamDTO GetSanphamById(int id);
         bool AddSanpham(SanphamDTO dto);
         bool UpdateSanpham(SanphamDTO dto);

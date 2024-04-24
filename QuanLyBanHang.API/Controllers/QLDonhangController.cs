@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
+using QuanLyBanHang.Application.Query;
 using QuanLyBanHang.Application.Services;
 
 namespace QuanLyBanHang.API.Controllers
@@ -14,10 +15,15 @@ namespace QuanLyBanHang.API.Controllers
         {
             this.donhangService = donhangService;
         }
-        [HttpGet]
-        public IActionResult GetAllDonhang() 
+        [HttpGet("GetAllDonhang")]
+        public IActionResult GetAllDonhang_NoQuery() 
         {
-            return Ok(donhangService.GetAllDonhang());
+            return Ok(donhangService.GetAllDonhang_NoQuery());
+        }
+        [HttpGet]
+        public IActionResult GetAllDonhang([FromQuery] DonhangQuery query)
+        {
+            return Ok(donhangService.GetAllDonhang(query));
         }
         [HttpGet("{id:int}")]
         public IActionResult GetDonhangById(int id)

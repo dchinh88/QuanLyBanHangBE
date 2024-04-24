@@ -1,4 +1,6 @@
-﻿using QuanLyBanHang.Application.DTO;
+﻿using QuanLyBanHang.Application.Common;
+using QuanLyBanHang.Application.DTO;
+using QuanLyBanHang.Application.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,8 @@ namespace QuanLyBanHang.Application.Interface
 {
     public interface INhacungcapService
     {
-        List<NhacungcapDTO> GetAllNhacungcap();
+        List<NhacungcapDTO> GetAllNhacungcap_NoQuery();
+        PageListResult<NhacungcapDTO> GetAllNhacungcap(NhacungcapQuery query);
         NhacungcapDTO GetNhacungcapById(int id);
         bool AddNhacungcap(NhacungcapDTO dto);
         bool UpdateNhacungcap(NhacungcapDTO dto);

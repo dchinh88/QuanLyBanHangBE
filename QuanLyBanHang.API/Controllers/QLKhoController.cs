@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
+using QuanLyBanHang.Application.Query;
 using QuanLyBanHang.Application.Services;
 
 namespace QuanLyBanHang.API.Controllers
@@ -15,10 +16,15 @@ namespace QuanLyBanHang.API.Controllers
         {
             this.khoService = khoService;
         }
-        [HttpGet]
-        public IActionResult GetAllKho()
+        [HttpGet("GetAllKho")]
+        public IActionResult GetAllKho_NoQuery()
         {
-            return Ok(khoService.GetAllKho());
+            return Ok(khoService.GetAllKho_NoQuery());
+        }
+        [HttpGet]
+        public IActionResult GetAllKho([FromQuery] KhoQuery query)
+        {
+            return Ok(khoService.GetAllKho(query));
         }
         [HttpGet("{id:int}")]
         public IActionResult GetKhoById(int id) 

@@ -1,4 +1,6 @@
-﻿using QuanLyBanHang.Application.DTO;
+﻿using QuanLyBanHang.Application.Common;
+using QuanLyBanHang.Application.DTO;
+using QuanLyBanHang.Application.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,8 @@ namespace QuanLyBanHang.Application.Interface
 {
     public interface IKhachhangService
     {
-        List<KhachhangDTO> GetAllKhachhang();
+        List<KhachhangDTO> GetAllKhachhang_NoQuery();
+        PageListResult<KhachhangDTO> GetAllKhachhang(KhachhangQuery query);
         KhachhangDTO GetKhachhangById(int id);
         bool AddKhachhang(KhachhangDTO dto);
         bool UpdateKhachhang(KhachhangDTO dto);

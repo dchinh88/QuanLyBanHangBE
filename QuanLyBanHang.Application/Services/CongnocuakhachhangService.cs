@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using QuanLyBanHang.Application.Common;
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
+using QuanLyBanHang.Application.Query;
 using QuanLyBanHang.Domain.Entities;
 using QuanLyBanHang.Domain.Repositories;
 using System;
@@ -32,9 +34,20 @@ namespace QuanLyBanHang.Application.Services
             return congnocuakhachhang.Delete(id);
         }
 
-        public List<CongnocuakhachhangDTO> GetAllCongnocuakhachhang()
+        public List<CongnocuakhachhangDTO> GetAllCongnocuakhachhang_NoQuery()
         {
             return mapper.Map<List<CongnocuakhachhangDTO>>(congnocuakhachhang.GetAll());
+        }
+
+        public PageListResult<CongnocuakhachhangDTO> GetAllCongnocuakhachhang(CongnocuakhachhangQuery query)
+        {
+            int begin = (query.page * query.limit) - query.limit;
+            var list = mapper.Map<List<CongnocuakhachhangDTO>>(congnocuakhachhang.GetAll());
+
+            var result = new PageListResult<CongnocuakhachhangDTO>();
+            result.items = list.Skip(begin).Take(query.limit).ToList();
+            result.totalItems = list.Count();
+            return result;
         }
 
         public CongnocuakhachhangDTO GetCongnocuakhachhangById(int id)

@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
+using QuanLyBanHang.Application.Common;
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
+using QuanLyBanHang.Application.Query;
 using QuanLyBanHang.Domain.Entities;
 using QuanLyBanHang.Domain.Repositories;
 using System;
@@ -32,9 +34,20 @@ namespace QuanLyBanHang.Application.Services
             return nhacungcap.Delete(id);
         }
 
-        public List<NhacungcapDTO> GetAllNhacungcap()
+        public List<NhacungcapDTO> GetAllNhacungcap_NoQuery()
         {
             return mapper.Map<List<NhacungcapDTO>>(nhacungcap.GetAll());
+        }
+
+        public PageListResult<NhacungcapDTO> GetAllNhacungcap(NhacungcapQuery query)
+        {
+            int begin = (query.page * query.limit) - query.limit;
+            var list = mapper.Map<List<NhacungcapDTO>>(nhacungcap.GetAll());
+
+            var result = new PageListResult<NhacungcapDTO>();
+            result.items = list.Skip(begin).Take(query.limit).ToList();
+            result.totalItems = list.Count();
+            return result;
         }
 
         public NhacungcapDTO GetNhacungcapById(int id)
