@@ -1,4 +1,6 @@
-﻿using QuanLyBanHang.Application.DTO;
+﻿using QuanLyBanHang.Application.Common;
+using QuanLyBanHang.Application.DTO;
+using QuanLyBanHang.Application.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +11,8 @@ namespace QuanLyBanHang.Application.Interface
 {
     public interface ILoaisanphamService
     {
-        List<LoaisanphamDTO> GetAllLoaisanpham();
+        List<LoaisanphamDTO> GetAllLoaisanpham_NoQuery();
+        PageListResult<LoaisanphamDTO> GetAllLoaisanpham(LoaisanphamQuery query);
         LoaisanphamDTO GetLoaisanphamById(int id);
         bool AddLoaisanpham(LoaisanphamDTO dto);
         bool UpdateLoaisanpham(LoaisanphamDTO dto);

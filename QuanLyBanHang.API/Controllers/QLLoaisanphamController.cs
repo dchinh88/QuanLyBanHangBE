@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
+using QuanLyBanHang.Application.Query;
 
 namespace QuanLyBanHang.API.Controllers
 {
@@ -13,10 +14,15 @@ namespace QuanLyBanHang.API.Controllers
         {
             this.loaisanphamService = loaisanphamService;
         }
-        [HttpGet]
-        public IActionResult GetAllLoaisanpham()
+        [HttpGet("GetAllLoaisanpham")]
+        public IActionResult GetAllLoaisanpham_NoQuery()
         {
-            return Ok(loaisanphamService.GetAllLoaisanpham());
+            return Ok(loaisanphamService.GetAllLoaisanpham_NoQuery());
+        }
+        [HttpGet]
+        public IActionResult GetAllLoaisanpham([FromQuery] LoaisanphamQuery query)
+        {
+            return Ok(loaisanphamService.GetAllLoaisanpham(query));
         }
         [HttpGet("{id:int}")]
         public IActionResult GetLoaisanphamById(int id)
