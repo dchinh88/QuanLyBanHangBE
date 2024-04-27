@@ -26,6 +26,8 @@ namespace QuanLyBanHang.Application.Services
         public bool AddPhieumuahang(PhieumuahangDTO dto)
         {
             dto.createdAt = DateTime.Now;
+            dto.updatedAt = null;
+            dto.deletedAt = null;
             return phieumuahang.Add(mapper.Map<Phieumuahang>(dto));
         }
 
@@ -58,6 +60,7 @@ namespace QuanLyBanHang.Application.Services
         public bool UpdatePhieumuahang(PhieumuahangDTO dto)
         {
             dto.updatedAt = DateTime.Now;
+            dto.deletedAt = null;
             return phieumuahang.Update(mapper.Map<Phieumuahang>(dto));
         }
     }

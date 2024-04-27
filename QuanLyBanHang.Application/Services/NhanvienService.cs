@@ -34,6 +34,8 @@ namespace QuanLyBanHang.Application.Services
             dto.Matkhau = HashPassword.GetHash(hash, dto.Matkhau);
 
             dto.createdAt = DateTime.Now;
+            dto.updatedAt = null;
+            dto.deletedAt = null;
             return nhanvien.Add(mapper.Map<Nhanvien>(dto));
         }
 
@@ -78,6 +80,7 @@ namespace QuanLyBanHang.Application.Services
         public bool SoftDelete(NhanvienDTO dto)
         {
             dto.deletedAt = DateTime.Now;
+            dto.deletedAt = null;
             return nhanvien.Update(mapper.Map<Nhanvien>(dto));
         }
     }

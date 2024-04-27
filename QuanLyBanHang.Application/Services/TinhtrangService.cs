@@ -24,6 +24,8 @@ namespace QuanLyBanHang.Application.Services
         public bool AddTinhtrang(TinhtrangDTO dto)
         {
             dto.createdAt = DateTime.Now;
+            dto.updatedAt = null;
+            dto.deletedAt = null;
             return tinhtrang.Add(mapper.Map<Tinhtrang>(dto));
         }
 
@@ -45,6 +47,7 @@ namespace QuanLyBanHang.Application.Services
         public bool UpdateTinhtrang(TinhtrangDTO dto)
         {
             dto.updatedAt = DateTime.Now;
+            dto.deletedAt = null;
             return tinhtrang.Update(mapper.Map<Tinhtrang>(dto));
         }
     }

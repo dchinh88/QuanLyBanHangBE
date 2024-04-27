@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.ObjectPool;
 using QuanLyBanHang.Application.Common;
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
@@ -27,6 +28,8 @@ namespace QuanLyBanHang.Application.Services
         public bool AddDonhang(DonhangDTO dto)
         {
             dto.createdAt = DateTime.Now;
+            dto.updatedAt = null;
+            dto.deletedAt = null;
             return donhang.Add(mapper.Map<Donhang>(dto));
         }
 
@@ -59,6 +62,7 @@ namespace QuanLyBanHang.Application.Services
         public bool UpdateDonhang(DonhangDTO dto)
         {
             dto.updatedAt = DateTime.Now;
+            dto.deletedAt = null;
             return donhang.Update(mapper.Map<Donhang>(dto));
         }
     }

@@ -26,6 +26,8 @@ namespace QuanLyBanHang.Application.Services
         public bool AddNhacungcap(NhacungcapDTO dto)
         {
             dto.createdAt = DateTime.Now;
+            dto.updatedAt = null;
+            dto.deletedAt = null;
             return nhacungcap.Add(mapper.Map<Nhacungcap>(dto));
         }
 
@@ -58,6 +60,7 @@ namespace QuanLyBanHang.Application.Services
         public bool UpdateNhacungcap(NhacungcapDTO dto)
         {
             dto.updatedAt = DateTime.Now;
+            dto.deletedAt = null;
             return nhacungcap.Update(mapper.Map<Nhacungcap>(dto));
         }
     }

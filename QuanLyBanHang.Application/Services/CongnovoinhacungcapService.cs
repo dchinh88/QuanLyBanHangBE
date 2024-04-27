@@ -26,6 +26,8 @@ namespace QuanLyBanHang.Application.Services
         public bool AddCongnovoinhacungcap(CongnovoinhacungcapDTO dto)
         {
             dto.createdAt = DateTime.Now;
+            dto.updatedAt = null;
+            dto.deletedAt = null;
             return congnovoinhacungcap.Add(mapper.Map<Congnovoinhacungcap>(dto));
         }
 
@@ -58,6 +60,7 @@ namespace QuanLyBanHang.Application.Services
         public bool UpdateCongnovoinhacungcap(CongnovoinhacungcapDTO dto)
         {
             dto.updatedAt = DateTime.Now;
+            dto.deletedAt = null;
             return congnovoinhacungcap.Update(mapper.Map<Congnovoinhacungcap>(dto));
         }
     }

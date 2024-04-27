@@ -26,6 +26,8 @@ namespace QuanLyBanHang.Application.Services
         public bool AddKhachhang(KhachhangDTO dto)
         {
             dto.createdAt = DateTime.Now;
+            dto.updatedAt = null;
+            dto.deletedAt = null;
             return khachhang.Add(mapper.Map<Khachhang>(dto));
         }
 
@@ -58,6 +60,7 @@ namespace QuanLyBanHang.Application.Services
         public bool UpdateKhachhang(KhachhangDTO dto)
         {
             dto.updatedAt = DateTime.Now;
+            dto.deletedAt = null;
             return khachhang.Update(mapper.Map<Khachhang>(dto));
         }
     }
