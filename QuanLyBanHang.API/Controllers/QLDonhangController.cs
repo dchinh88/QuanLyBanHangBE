@@ -54,7 +54,7 @@ namespace QuanLyBanHang.API.Controllers
             }
             return NotFound();
         }
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult CapnhatDonhang(DonhangDTO donhangDTO)
         {
             if(!donhangService.UpdateDonhang(donhangDTO))

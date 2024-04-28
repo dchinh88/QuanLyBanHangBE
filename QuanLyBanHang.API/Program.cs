@@ -24,12 +24,15 @@ builder.Services.AddDbContext<QlkinhdoanhContext>(option => option.UseSqlServer(
 
 builder.Services.AddApplicationModules();
 
-builder.Services.AddCors(p => p.AddPolicy("Policy", builder =>
+builder.Services.AddCors(options =>
 {
-    builder.AllowAnyHeader()
-            .AllowAnyMethod()
-            .AllowAnyOrigin();
-}));
+    options.AddPolicy("AllowPolicy", builder =>
+    {
+        builder.AllowAnyHeader()
+               .AllowAnyMethod()
+               .AllowAnyOrigin();
+    });
+});
 
 builder.Services.AddMvc(option =>
 {
@@ -111,7 +114,7 @@ app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
-app.UseCors("Policy");
+app.UseCors("AllowPolicy");
 
 app.UseAuthorization();
 app.UseAuthentication();

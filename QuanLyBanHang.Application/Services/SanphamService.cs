@@ -2,6 +2,7 @@
 using QuanLyBanHang.Application.Common;
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
+using QuanLyBanHang.Application.LinQModel;
 using QuanLyBanHang.Application.Query;
 using QuanLyBanHang.Domain.Entities;
 using QuanLyBanHang.Domain.Repositories;
@@ -51,18 +52,18 @@ namespace QuanLyBanHang.Application.Services
         {
             int begin = (query.page * query.limit) - query.limit;
 
-            /* var data = from sp in sanpham.GetAll()
-                        join lsp in loaisanpham.GetAll()
-                        on sp.Loaisanphamid equals lsp.Id
-                        join k in kho.GetAll()
-                        on sp.Khoid equals k.Id
-                        where sp.Deletedat == null &&
-                        lsp.Deletedat == null && k.Deletedat == null
-                        select new SanphamDTO
-                        {
+            /*var data = from sp in sanpham.GetAll()
+                       join lsp in loaisanpham.GetAll()
+                       on sp.Loaisanphamid equals lsp.Id
+                       join k in kho.GetAll()
+                       on sp.Khoid equals k.Id
+                       where sp.Deletedat == null &&
+                       lsp.Deletedat == null && k.Deletedat == null
+                       select new
+                       {
 
-                        };
-             var list = data.ToList();*/
+                       };
+            var list = data.ToList();*/
             var list = mapper.Map<List<SanphamDTO>>(sanpham.GetAll());
 
             var result = new PageListResult<SanphamDTO>();

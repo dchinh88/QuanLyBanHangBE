@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CommonHelper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuanLyBanHang.Application.Common;
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
 using QuanLyBanHang.Application.Query;
 using QuanLyBanHang.Application.Services;
+using QuanLyBanHang.Infrastructure.Context;
 
 namespace QuanLyBanHang.API.Controllers
 {
@@ -12,9 +15,11 @@ namespace QuanLyBanHang.API.Controllers
     public class QLSanphamController : ControllerBase
     {
         private readonly ISanPhamService sanPhamService;
-        public QLSanphamController(ISanPhamService sanPhamService)
+        private readonly QlkinhdoanhContext context;
+        public QLSanphamController(ISanPhamService sanPhamService, QlkinhdoanhContext context)
         {
             this.sanPhamService = sanPhamService;
+            this.context = context;
         }
         [HttpGet("GetAllSanpham")]
         public IActionResult GetALlSanpham_NoQuery()
@@ -23,16 +28,24 @@ namespace QuanLyBanHang.API.Controllers
         }
 
         [HttpGet]
+        /*[Authorize(Roles = "admin")]*/
+
         public IActionResult GetAllSanpham([FromQuery] SanphamQuery query)
         {
-            return Ok(sanPhamService.GetAllSanpham(query));
+            var isAdmin = context.Nhanviens.FirstOrDefault(x => x.Chucvu == "admin");
+            if (isAdmin != null)
+            {
+                return Ok(sanPhamService.GetAllSanpham(query));
+            }
+            return StatusCode(403, "Not have access");
+
         }
 
         [HttpGet("{id:int}")]
         public IActionResult GetSanphamById(int id)
         {
             var sanpham = sanPhamService.GetSanphamById(id);
-            if(sanpham == null)
+            if (sanpham == null)
             {
                 return NotFound();
             }
@@ -41,7 +54,7 @@ namespace QuanLyBanHang.API.Controllers
         [HttpPost]
         public IActionResult ThemSanpham(SanphamDTO sanphamDTO)
         {
-            if(sanPhamService.AddSanpham(sanphamDTO))
+            if (sanPhamService.AddSanpham(sanphamDTO))
             {
                 return Ok(sanphamDTO);
             }
@@ -51,16 +64,16 @@ namespace QuanLyBanHang.API.Controllers
         public IActionResult XoaSanpham(int id)
         {
             var sanpham = sanPhamService.DeleteSanpham(id);
-            if(sanpham)
+            if (sanpham)
             {
                 return NoContent();
             }
             return NotFound();
         }
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult CapnhatSanpham(SanphamDTO sanphamDTO)
         {
-            if(!sanPhamService.UpdateSanpham(sanphamDTO))
+            if (!sanPhamService.UpdateSanpham(sanphamDTO))
             {
                 return Ok(sanphamDTO);
             }

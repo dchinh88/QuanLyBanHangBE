@@ -47,7 +47,7 @@ namespace QuanLyBanHang.API.Controllers
             }
             return NotFound();
         }
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult CapnhatChitietdonhang(ChitietdonhangDTO chitietdonhangDTO)
         {
             if(!chitietdonhangService.UpdateChitietdonhang(chitietdonhangDTO))

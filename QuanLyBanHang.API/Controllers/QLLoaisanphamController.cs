@@ -53,7 +53,7 @@ namespace QuanLyBanHang.API.Controllers
             }
             return NotFound();
         }
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult CapnhatLoaisanpham(LoaisanphamDTO loaisanphamDTO)
         {
             if(!loaisanphamService.UpdateLoaisanpham(loaisanphamDTO))

@@ -55,7 +55,7 @@ namespace QuanLyBanHang.API.Controllers
             }
             return NotFound();
         }
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult CapnhatKho(KhoDTO khoDTO)
         {
             if(!khoService.UpdateKho(khoDTO))

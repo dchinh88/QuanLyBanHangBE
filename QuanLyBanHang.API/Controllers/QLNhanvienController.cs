@@ -40,7 +40,7 @@ namespace QuanLyBanHang.API.Controllers
             }
             return Ok(nhanvien);
         }
-        [Authorize(Roles = "admin")]
+        /*[Authorize(Roles = "admin")]*/
         [HttpPost]
         public IActionResult ThemNhanvien(NhanvienDTO nhanvienDTO)
         {
@@ -61,7 +61,7 @@ namespace QuanLyBanHang.API.Controllers
             }
             return NotFound();
         }
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult CapnhatNhanvien(NhanvienDTO nhanvienDTO)
         {
             if(!nhanvienService.UpdateNhanvien(nhanvienDTO))

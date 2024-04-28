@@ -47,7 +47,7 @@ namespace QuanLyBanHang.API.Controllers
             }
             return NotFound();
         }
-        [HttpPut]
+        [HttpPut("{id}")]
         public IActionResult CapnhatTinhtrang(TinhtrangDTO tinhtrangDTO)
         {
             if(!tinhtrangService.UpdateTinhtrang(tinhtrangDTO))
