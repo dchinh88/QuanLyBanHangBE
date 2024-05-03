@@ -55,7 +55,8 @@ namespace QuanLyBanHang.Application.Services.Authentication
                     {
                         token = this.GenerateToken(user, JwtContant.expiresIn),
                         expires = JwtContant.expiresIn,
-                        role = user.Chucvu
+                        role = user.Chucvu,
+                        iduser = user.Id
                     },
                     refreshToken = new
                     {
