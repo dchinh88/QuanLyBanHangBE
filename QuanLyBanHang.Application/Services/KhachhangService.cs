@@ -5,6 +5,7 @@ using QuanLyBanHang.Application.Interface;
 using QuanLyBanHang.Application.Query;
 using QuanLyBanHang.Domain.Entities;
 using QuanLyBanHang.Domain.Repositories;
+using QuanLyBanHang.Infrastructure.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,10 +18,12 @@ namespace QuanLyBanHang.Application.Services
     {
         private readonly IKhachhangRepositories khachhang;
         private readonly IMapper mapper;
-        public KhachhangService(IKhachhangRepositories khachhang, IMapper mapper)
+        private readonly QlkinhdoanhContext context;
+        public KhachhangService(IKhachhangRepositories khachhang, IMapper mapper, QlkinhdoanhContext context)
         {
             this.khachhang = khachhang;
             this.mapper = mapper;
+            this.context = context;
         }
 
         public bool AddKhachhang(KhachhangDTO dto)
@@ -39,6 +42,21 @@ namespace QuanLyBanHang.Application.Services
         public List<KhachhangDTO> GetAllKhachhang_NoQuery()
         {
             return mapper.Map<List<KhachhangDTO>>(khachhang.GetAll());
+        }
+
+        public KhachhangDTO GetKhachhangByPhone(string phone)
+        {
+
+            var khachhang = context.Khachhangs.FirstOrDefault(n => n.Sodienthoai == phone);
+            /* var khachhang = context.Khachhangs.Find(phone);*/
+            if (khachhang == null)
+            {
+                return null;
+            }
+            return mapper.Map<KhachhangDTO>(khachhang);
+           /* return mapper.Map<KhachhangDTO>(khachhang.GetAll().Where(o => o.Sodienthoai == phone));*/
+
+
         }
 
         public PageListResult<KhachhangDTO> GetAllKhachhang(KhachhangQuery query)
@@ -63,5 +81,7 @@ namespace QuanLyBanHang.Application.Services
             dto.deletedAt = null;
             return khachhang.Update(mapper.Map<Khachhang>(dto));
         }
+
+        
     }
 }

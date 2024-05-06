@@ -2,6 +2,7 @@
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
 using QuanLyBanHang.Application.Query;
+using QuanLyBanHang.Infrastructure.Context;
 
 namespace QuanLyBanHang.API.Controllers
 {
@@ -10,9 +11,11 @@ namespace QuanLyBanHang.API.Controllers
     public class QLKhachhangController : ControllerBase
     {
         private readonly IKhachhangService khachhangService;
-        public QLKhachhangController(IKhachhangService khachhangService)
+        private readonly QlkinhdoanhContext context;
+        public QLKhachhangController(IKhachhangService khachhangService, QlkinhdoanhContext context)
         {
             this.khachhangService = khachhangService;
+            this.context = context;
         }
         [HttpGet("GetAllKhachhang")]
         public IActionResult GetAllKhachhang_NoQuery()
@@ -29,6 +32,18 @@ namespace QuanLyBanHang.API.Controllers
         {
             var khachhang = khachhangService.GetKhachhangById(id);
             if(khachhang == null)
+            {
+                return NotFound();
+            }
+            return Ok(khachhang);
+        }
+        [HttpGet("phone/{phone}")]
+        public IActionResult GetKhachhangByPhone(string phone)
+        {
+            
+
+            var khachhang = khachhangService.GetKhachhangByPhone(phone);
+            if (khachhang == null)
             {
                 return NotFound();
             }

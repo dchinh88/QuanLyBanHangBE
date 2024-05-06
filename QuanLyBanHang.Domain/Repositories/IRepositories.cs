@@ -13,5 +13,7 @@ namespace QuanLyBanHang.Domain.Repositories
         bool Add(T entity);
         bool Update(T entity);
         bool Delete(int id);
+
+        T GetByString(int name);
     }
 }

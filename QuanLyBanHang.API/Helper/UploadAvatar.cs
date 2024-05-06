@@ -106,15 +106,36 @@ namespace QuanLyBanHang.API.Helper
             }
         }
 
-        [HttpGet("RemoveAvatar")]
-        public async Task<IActionResult> RemoveAvatar(int idnhanvien)
+        [HttpGet("RemoveImage")]
+        public async Task<IActionResult> RemoveImage(int id)
         {
-            var avatar = this.qlkinhdoanhContext.Avatars.Where(e => e.Nhanvienid == idnhanvien);
+            var img = this.qlkinhdoanhContext.Avatars.Where(e => e.Nhanvienid == id).FirstOrDefault();
+            try
+            {
+                if (img != null)
+                {
+                    this.qlkinhdoanhContext.Avatars.Remove(img);
+                    await qlkinhdoanhContext.SaveChangesAsync();
+                    return Ok();
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return NotFound();
+            }
+            return NotFound();
+        }
+
+        /*[HttpGet("RemoveAvatar")]
+        public async Task<IActionResult> RemoveAvatar(int id)
+        {
+            var avatar = this.qlkinhdoanhContext.Avatars.Where(e => e.Id == id);
             try
             {
                 if(avatar != null)
                 {
-                    this.qlkinhdoanhContext.Remove(avatar);
+                    this.qlkinhdoanhContext.Avatars.Remove(avatar);
                     await qlkinhdoanhContext.SaveChangesAsync();
                     return Ok();
                 }
@@ -124,6 +145,6 @@ namespace QuanLyBanHang.API.Helper
                 return NotFound();
             }
             return NotFound();
-        }
+        }*/
     }
 }

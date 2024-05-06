@@ -47,6 +47,16 @@ namespace QuanLyBanHang.Infrastructure.Repositories
             return entities.ToList();
         }
 
+        public T GetByString(int name)
+        {
+            var entity = entities.Find(name);
+            if (entity != null)
+            {
+                return entity;
+            }
+            return null;
+        }
+
         public T GetEntity(int id)
         {
             var entity = entities.Find(id);
@@ -56,6 +66,8 @@ namespace QuanLyBanHang.Infrastructure.Repositories
             }
             return null;
         }
+
+        
 
         public bool Update(T entity)
         {

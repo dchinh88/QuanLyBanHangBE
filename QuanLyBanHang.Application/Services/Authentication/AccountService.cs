@@ -45,10 +45,13 @@ namespace QuanLyBanHang.Application.Services.Authentication
             {
                 SHA256 hash = SHA256.Create();
                 var user = _context.Nhanviens.FirstOrDefault(u => u.Email == username);
+                /*var avt = _context.Avatars.FirstOrDefault(i => i.Nhanvienid == user.Id);*/
+
                 if (user == null || !HashPassword.VerifyHash(hash, password, user.Matkhau))
                 {
                     return string.Empty;
                 }
+                
                 return new
                 {
                     accessToken = new
@@ -56,7 +59,8 @@ namespace QuanLyBanHang.Application.Services.Authentication
                         token = this.GenerateToken(user, JwtContant.expiresIn),
                         expires = JwtContant.expiresIn,
                         role = user.Chucvu,
-                        iduser = user.Id
+                        iduser = user.Id,
+                       avatar = GetAvatarByUserId(user.Id)
                     },
                     refreshToken = new
                     {
@@ -152,6 +156,16 @@ namespace QuanLyBanHang.Application.Services.Authentication
                 Console.WriteLine(ex.Message);
                 return false;
             }
+        }
+
+        private byte[] GetAvatarByUserId(int id)
+        {
+            var avatar = _context.Avatars.FirstOrDefault(x => x.Nhanvienid == id);
+            if(avatar != null)
+            {
+                return avatar.Avatar1;
+            }
+            return null;
         }
     }
 }

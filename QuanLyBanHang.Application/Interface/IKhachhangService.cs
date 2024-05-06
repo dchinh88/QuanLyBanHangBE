@@ -17,5 +17,7 @@ namespace QuanLyBanHang.Application.Interface
         bool AddKhachhang(KhachhangDTO dto);
         bool UpdateKhachhang(KhachhangDTO dto);
         bool DeleteKhachhang(int id);
+
+        KhachhangDTO GetKhachhangByPhone(string phone);
     }
 }
