@@ -20,7 +20,7 @@ namespace QuanLyBanHang.API.Controllers
             return Ok(phieumuahangService.GetAllPhieumuahang_NoQuery());
         }
         [HttpGet]
-        public IActionResult GetAllPhieumuahang(PhieumuahangQuery query)
+        public IActionResult GetAllPhieumuahang([FromQuery] PhieumuahangQuery query)
         {
             return Ok(phieumuahangService.GetAllPhieumuahang(query));
         }
