@@ -79,5 +79,28 @@ namespace QuanLyBanHang.API.Controllers
             }
             return BadRequest();
         }
+
+
+        [HttpGet("name/{name}")]
+        public IActionResult GetSanphamByName(string name)
+        {
+            var sanpham = sanPhamService.GetSanphamByName(name);
+            if (sanpham == null)
+            {
+                return NotFound();
+            }
+            return Ok(sanpham);
+        }
+
+        [HttpGet("idlsp/{id}")]
+        public IActionResult GetSanphamByIdLoaisanpham(int id)
+        {
+            var sanpham = sanPhamService.GetSanphamByIdLoaisanpham(id);
+            if (sanpham == null)
+            {
+                return NotFound();
+            }
+            return Ok(sanpham);
+        }
     }
 }

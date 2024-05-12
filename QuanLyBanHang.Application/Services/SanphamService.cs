@@ -6,6 +6,7 @@ using QuanLyBanHang.Application.LinQModel;
 using QuanLyBanHang.Application.Query;
 using QuanLyBanHang.Domain.Entities;
 using QuanLyBanHang.Domain.Repositories;
+using QuanLyBanHang.Infrastructure.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,14 +20,13 @@ namespace QuanLyBanHang.Application.Services
     {
         private readonly ISanphamRepositories sanpham;
         private readonly IMapper mapper;
-        private readonly IKhoRepositories kho;
-        private readonly ILoaisanphamRepositories loaisanpham;
-        public SanphamService(ISanphamRepositories sanpham, IMapper mapper, IKhoRepositories kho, ILoaisanphamRepositories loaisanpham)
+  
+        private readonly QlkinhdoanhContext context;
+        public SanphamService(ISanphamRepositories sanpham, IMapper mapper, QlkinhdoanhContext context)
         {
             this.sanpham = sanpham;
             this.mapper = mapper;
-            this.kho = kho;
-            this.loaisanpham = loaisanpham;
+            this.context = context;
         }
 
         
@@ -82,6 +82,27 @@ namespace QuanLyBanHang.Application.Services
             dto.updatedAt = DateTime.Now;
             dto.deletedAt = null;
             return sanpham.Update(mapper.Map<Sanpham>(dto));
+        }
+
+        public List<SanphamDTO> GetSanphamByName(string name)
+        {
+            /*var sanpham = context.Sanphams.FirstOrDefault(n => n.Tensanpham == name);*/
+            var sanpham = context.Sanphams.Where(n => n.Tensanpham.Contains(name)).ToList();
+            if (sanpham == null)
+            {
+                return null;
+            }
+            return mapper.Map<List<SanphamDTO>>(sanpham);
+        }
+
+        public List<SanphamDTO> GetSanphamByIdLoaisanpham(int id)
+        {
+            var sanpham = context.Sanphams.Where(n => n.Loaisanphamid == id).ToList();
+            if (sanpham == null)
+            {
+                return null;
+            }
+            return mapper.Map<List<SanphamDTO>>(sanpham);
         }
     }
 }

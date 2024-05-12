@@ -17,5 +17,9 @@ namespace QuanLyBanHang.Application.Interface
         bool AddSanpham(SanphamDTO dto);
         bool UpdateSanpham(SanphamDTO dto);
         bool DeleteSanpham(int id);
+
+
+        List<SanphamDTO> GetSanphamByName(string name);
+        List<SanphamDTO> GetSanphamByIdLoaisanpham(int id);
     }
 }
