@@ -21,5 +21,6 @@ namespace QuanLyBanHang.Application.Interface
 
         List<SanphamDTO> GetSanphamByName(string name);
         List<SanphamDTO> GetSanphamByIdLoaisanpham(int id);
+        List<SanphamDTO> GetSanphamByIdKho(int id);
     }
 }

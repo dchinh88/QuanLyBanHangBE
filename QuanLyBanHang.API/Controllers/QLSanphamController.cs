@@ -102,5 +102,16 @@ namespace QuanLyBanHang.API.Controllers
             }
             return Ok(sanpham);
         }
+
+        [HttpGet("idkho/{id}")]
+        public IActionResult GetSanphamByIdKho(int id)
+        {
+            var sanpham = sanPhamService.GetSanphamByIdKho(id);
+            if(sanpham == null)
+            {
+                return NotFound();
+            }
+            return Ok(sanpham);
+        }
     }
 }

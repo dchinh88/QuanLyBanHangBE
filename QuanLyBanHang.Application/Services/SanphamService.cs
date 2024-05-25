@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Identity.Client;
 using QuanLyBanHang.Application.Common;
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
@@ -99,6 +100,16 @@ namespace QuanLyBanHang.Application.Services
         {
             var sanpham = context.Sanphams.Where(n => n.Loaisanphamid == id).ToList();
             if (sanpham == null)
+            {
+                return null;
+            }
+            return mapper.Map<List<SanphamDTO>>(sanpham);
+        }
+
+        public List<SanphamDTO> GetSanphamByIdKho(int id)
+        {
+            var sanpham = context.Sanphams.Where(n => n.Khoid == id).ToList();
+            if(sanpham == null)
             {
                 return null;
             }
