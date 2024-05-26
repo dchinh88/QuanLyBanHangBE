@@ -81,8 +81,11 @@ namespace QuanLyBanHang.Application.Services.Authentication
 
             var authClaims = new List<Claim>
             {
-                new Claim(ClaimTypes.Name, nhanvien.Email),
-                new Claim(JwtRegisteredClaimNames.Email, Guid.NewGuid().ToString())
+                new Claim(JwtRegisteredClaimNames.Sub, nhanvien.Id.ToString()),
+                new Claim(ClaimTypes.Email, nhanvien.Email),
+                new Claim(JwtRegisteredClaimNames.Email, Guid.NewGuid().ToString()),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.Role, nhanvien.Chucvu.ToString()) //Them claim role
             };
 
             var token = new JwtSecurityToken
@@ -92,12 +95,12 @@ namespace QuanLyBanHang.Application.Services.Authentication
                 expires: DateTime.Now.AddSeconds(time), //thoi gian het han cua token
                 notBefore: DateTime.Now,
                 claims: authClaims,
-                signingCredentials: new SigningCredentials(authenKey, SecurityAlgorithms.HmacSha512)
+                signingCredentials: new SigningCredentials(authenKey, SecurityAlgorithms.HmacSha256)
             );
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
 
-        public dynamic refreshToken(string token)
+        /*public dynamic refreshToken(string token)
         {
             try
             {
@@ -108,7 +111,7 @@ namespace QuanLyBanHang.Application.Services.Authentication
                 {
                     throw new SecurityTokenException("Invalid token");
                 }
-                var email = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Name).Value;
+                var email = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Email)?.Value;
                 var user = _context.Nhanviens.FirstOrDefault(u => u.Email == email);
                 if (user == null)
                 {
@@ -137,6 +140,61 @@ namespace QuanLyBanHang.Application.Services.Authentication
                 Console.WriteLine(ex.Message);
                 throw new CommonException("Error refreshing token", 500, ex);
             }
+        }*/
+
+        public dynamic refreshToken(string token)
+        {
+            try
+            {
+                var handler = new JwtSecurityTokenHandler();
+                var jwtToken = handler.ReadToken(token) as JwtSecurityToken;
+
+                if (jwtToken == null)
+                {
+                    throw new SecurityTokenException("Invalid token");
+                }
+
+                var email = jwtToken.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email)?.Value;
+                if (email == null)
+                {
+                    throw new SecurityTokenException("Email claim not found in token");
+                }
+
+                var user = _context.Nhanviens.FirstOrDefault(u => u.Email == email);
+                if (user == null)
+                {
+                    throw new SecurityTokenException("User not found");
+                }
+
+                var newAccessToken = new
+                {
+                    token = GenerateToken(user, JwtContant.expiresIn),
+                    expires = JwtContant.expiresIn,
+                    role = user.Chucvu
+                };
+
+                var newRefreshToken = new
+                {
+                    token = GenerateToken(user, JwtContant.refresh_expiresIn),
+                    expiresIn = JwtContant.refresh_expiresIn
+                };
+
+                return new
+                {
+                    accessToken = newAccessToken,
+                    refreshToken = newRefreshToken
+                };
+            }
+            catch (SecurityTokenException ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new CommonException("Security token error", 401, ex);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw new CommonException("Error refreshing token", 500, ex);
+            }
         }
 
         public bool verifyToken(string token)
@@ -147,7 +205,7 @@ namespace QuanLyBanHang.Application.Services.Authentication
                 var jwtToken = handler.ReadToken(token) as JwtSecurityToken;
                 if (jwtToken == null)
                 {
-                    return true;
+                    return false;
                 }
                 return jwtToken.ValidTo < DateTime.UtcNow;
             }

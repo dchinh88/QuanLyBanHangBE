@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.DotNet.Scaffolding.Shared.Messaging;
+using Microsoft.IdentityModel.Tokens;
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface.IAuthentication;
 using QuanLyBanHang.Domain.Models;
@@ -36,13 +37,13 @@ namespace QuanLyBanHang.API.Controllers.Authentication
             }
         }
 
-        [HttpPost("refresh_token")]
+        /*[HttpPost("refresh")]
         public IActionResult sendRefreshToken(string token)
         {
             try
             {
                 var decodeToken = account.verifyToken(token);
-                if(decodeToken)
+                if(!decodeToken)
                 {
                     var newRefreshToken = account.refreshToken(token);
                     return newRefreshToken;
@@ -56,6 +57,34 @@ namespace QuanLyBanHang.API.Controllers.Authentication
                 return BadRequest(ex.Message);
             }
 
+        }*/
+
+        [HttpPost("refresh")]
+        public IActionResult SendRefreshToken(string token)
+        {
+            try
+            {
+                var decodedToken = account.verifyToken(token);
+                if (!decodedToken)
+                {
+                    var newTokens = account.refreshToken(token);
+                    return Ok(newTokens);
+                }
+                else
+                {
+                    throw new SecurityTokenException("Invalid refresh token");
+                }
+            }
+            catch (SecurityTokenException ex)
+            {
+                Console.WriteLine(ex.Message);
+                return Unauthorized(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return BadRequest(new { message = ex.Message });
+            }
         }
     }
 }

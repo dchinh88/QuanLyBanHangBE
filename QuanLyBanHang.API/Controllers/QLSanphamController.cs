@@ -1,6 +1,7 @@
 ﻿using CommonHelper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using QuanLyBanHang.Application.Common;
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
@@ -12,6 +13,7 @@ namespace QuanLyBanHang.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+   /* [Authorize]*/
     public class QLSanphamController : ControllerBase
     {
         private readonly ISanPhamService sanPhamService;
@@ -22,6 +24,7 @@ namespace QuanLyBanHang.API.Controllers
             this.context = context;
         }
         [HttpGet("GetAllSanpham")]
+        /*[Authorize(Roles = "admin")]*/
         public IActionResult GetALlSanpham_NoQuery()
         {
             return Ok(sanPhamService.GetAllSanpham_NoQuery());
