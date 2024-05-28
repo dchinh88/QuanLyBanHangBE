@@ -51,7 +51,7 @@ namespace QuanLyBanHang.Application.Services.Authentication
                 {
                     return string.Empty;
                 }
-                
+
                 return new
                 {
                     accessToken = new
@@ -60,7 +60,7 @@ namespace QuanLyBanHang.Application.Services.Authentication
                         expires = JwtContant.expiresIn,
                         role = user.Chucvu,
                         iduser = user.Id,
-                       avatar = GetAvatarByUserId(user.Id)
+                        avatar = GetAvatarByUserId(user.Id)
                     },
                     refreshToken = new
                     {
@@ -75,7 +75,7 @@ namespace QuanLyBanHang.Application.Services.Authentication
             }
         }
 
-        private string GenerateToken(Nhanvien nhanvien, int time)
+        /*private string GenerateToken(Nhanvien nhanvien, int time)
         {
             var authenKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]));
 
@@ -85,7 +85,8 @@ namespace QuanLyBanHang.Application.Services.Authentication
                 new Claim(ClaimTypes.Email, nhanvien.Email),
                 new Claim(JwtRegisteredClaimNames.Email, Guid.NewGuid().ToString()),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.Role, nhanvien.Chucvu.ToString()) //Them claim role
+                *//*new Claim(ClaimTypes.Role, nhanvien.Chucvu),*//* //Them claim role
+                new Claim("chucvu", nhanvien.Chucvu)
             };
 
             var token = new JwtSecurityToken
@@ -98,49 +99,34 @@ namespace QuanLyBanHang.Application.Services.Authentication
                 signingCredentials: new SigningCredentials(authenKey, SecurityAlgorithms.HmacSha256)
             );
             return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-        /*public dynamic refreshToken(string token)
-        {
-            try
-            {
-                var handler = new JwtSecurityTokenHandler();
-                var jwtToken = handler.ReadToken(token) as JwtSecurityToken;
-
-                if (jwtToken == null)
-                {
-                    throw new SecurityTokenException("Invalid token");
-                }
-                var email = jwtToken.Claims.First(claim => claim.Type == ClaimTypes.Email)?.Value;
-                var user = _context.Nhanviens.FirstOrDefault(u => u.Email == email);
-                if (user == null)
-                {
-                    throw new SecurityTokenException("User not found");
-                }
-                var newAccessToken = new
-                {
-                    token = GenerateToken(user, JwtContant.expiresIn),
-                    expires = JwtContant.expiresIn,
-                    role = user.Chucvu
-                };
-
-                var newRefreshToken = new
-                {
-                    token = GenerateToken(user, JwtContant.refresh_expiresIn),
-                    expiresIn = JwtContant.refresh_expiresIn
-                };
-                return new
-                {
-                    accessToken = newAccessToken,
-                    refreshToken = newRefreshToken
-                };
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-                throw new CommonException("Error refreshing token", 500, ex);
-            }
         }*/
+
+        private string GenerateToken(Nhanvien nhanvien, int time)
+        {
+            var authenKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JWT:Secret"]));
+
+            var authClaims = new List<Claim>
+            {
+                new Claim(JwtRegisteredClaimNames.Sub, nhanvien.Id.ToString()),
+                new Claim(ClaimTypes.Email, nhanvien.Email),
+                new Claim(JwtRegisteredClaimNames.Email, nhanvien.Email),
+                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                new Claim("chucvu", nhanvien.Chucvu),
+               /* new Claim(ClaimTypes.Role, nhanvien.Chucvu)*/
+            };
+
+            var token = new JwtSecurityToken
+            (
+                issuer: configuration["JWT:ValidIssuer"],
+                audience: configuration["JWT:ValidAudience"],
+                expires: DateTime.Now.AddSeconds(time),
+                notBefore: DateTime.Now,
+                claims: authClaims,
+                signingCredentials: new SigningCredentials(authenKey, SecurityAlgorithms.HmacSha256)
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
 
         public dynamic refreshToken(string token)
         {
@@ -219,7 +205,7 @@ namespace QuanLyBanHang.Application.Services.Authentication
         private byte[] GetAvatarByUserId(int id)
         {
             var avatar = _context.Avatars.FirstOrDefault(x => x.Nhanvienid == id);
-            if(avatar != null)
+            if (avatar != null)
             {
                 return avatar.Avatar1;
             }

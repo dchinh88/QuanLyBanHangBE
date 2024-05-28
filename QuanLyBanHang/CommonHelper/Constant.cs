@@ -9,7 +9,7 @@ namespace CommonHelper
     public static class JwtContant
     {
         public static int expiresIn { get; } = 1000;
-        public static int refresh_expiresIn { get; } = 1200;
+        public static int refresh_expiresIn { get; } = 1800;
     }
     public static class CommonHttpStatus
     {

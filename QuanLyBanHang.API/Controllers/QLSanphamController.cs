@@ -13,7 +13,7 @@ namespace QuanLyBanHang.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   /* [Authorize]*/
+    /*[Authorize]*/
     public class QLSanphamController : ControllerBase
     {
         private readonly ISanPhamService sanPhamService;
@@ -24,24 +24,17 @@ namespace QuanLyBanHang.API.Controllers
             this.context = context;
         }
         [HttpGet("GetAllSanpham")]
-        /*[Authorize(Roles = "admin")]*/
+        [Authorize(Policy = "AdminPolicy")]
         public IActionResult GetALlSanpham_NoQuery()
         {
             return Ok(sanPhamService.GetAllSanpham_NoQuery());
         }
 
         [HttpGet]
-        /*[Authorize(Roles = "admin")]*/
-
+        [Authorize(Policy = "AdminPolicy")]
         public IActionResult GetAllSanpham([FromQuery] SanphamQuery query)
         {
-            var isAdmin = context.Nhanviens.FirstOrDefault(x => x.Chucvu == "admin");
-            if (isAdmin != null)
-            {
-                return Ok(sanPhamService.GetAllSanpham(query));
-            }
-            return StatusCode(403, "Not have access");
-
+            return Ok(sanPhamService.GetAllSanpham(query));
         }
 
         [HttpGet("{id:int}")]

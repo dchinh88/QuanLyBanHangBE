@@ -17,7 +17,7 @@ namespace QuanLyBanHang.API.Controllers.Authentication
             this.account = account;
         }
         [HttpPost("Login")]
-        public IActionResult Login([FromBody]SignInModel model)
+        public IActionResult Login([FromBody] SignInModel model)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace QuanLyBanHang.API.Controllers.Authentication
         }*/
 
         [HttpPost("refresh")]
-        public IActionResult SendRefreshToken(string token)
+        public IActionResult sendRefreshToken(string token)
         {
             try
             {

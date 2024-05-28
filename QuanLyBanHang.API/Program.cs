@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NuGet.Common;
 using QuanLyBanHang.Application.Modules;
 using QuanLyBanHang.Domain.Entities;
 using QuanLyBanHang.Infrastructure.Context;
@@ -44,20 +45,23 @@ builder.Services.Configure<FormOptions>(options =>
     options.MultipartBodyLengthLimit = long.MaxValue;
 });
 
+//Add Identity
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<QlkinhdoanhContext>()
                 .AddDefaultTokenProviders();
 
+
+//Add Authentication
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+    /*options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;*/
 }).AddJwtBearer(options =>
 {
-    options.SaveToken = true;
-    options.RequireHttpsMetadata = false;
-    options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    /*options.SaveToken = true;
+    options.RequireHttpsMetadata = false;*/
+    options.TokenValidationParameters = new TokenValidationParameters
     {
         ValidateIssuer = true,
         ValidateAudience = true,
@@ -65,9 +69,21 @@ builder.Services.AddAuthentication(options =>
         ValidateIssuerSigningKey = true,
         ValidAudience = builder.Configuration["JWT:ValidAudience"],
         ValidIssuer = builder.Configuration["JWT:ValidIssuer"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes
-            (builder.Configuration["JWT:Secret"]))
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT:Secret"]))
     };
+});
+
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("AdminPolicy", policy => policy.RequireClaim("chucvu", "admin"));
+    options.AddPolicy("StaffPolicy", policy => policy.RequireClaim("chucvu", "staff"));
+});
+
+
+builder.Services.AddLogging(logging =>
+{
+    logging.AddConsole();
+    logging.AddDebug();
 });
 
 //Cau hinh cho phep authorization su dung Swagger (JWT)
@@ -80,7 +96,7 @@ builder.Services.ConfigureSwaggerGen(options =>
         Scheme = "Bearer",
         BearerFormat = "JWT",
         In = Microsoft.OpenApi.Models.ParameterLocation.Header,
-        Description = "Description",
+        Description = "Enter 'Bearer' [space] and then your valid token in the text input below.",
     });
     options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
     {
@@ -98,7 +114,8 @@ builder.Services.ConfigureSwaggerGen(options =>
     });
 });
 
-builder.Services.AddAuthorization();
+
+
 
 builder.Services.AddControllers();
 builder.Services.AddHttpContextAccessor();
@@ -114,14 +131,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 app.UseHttpsRedirection();
 
 app.UseStaticFiles();
 
 app.UseCors("AllowPolicy");
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseRouting();
+app.UseAuthorization();
 
 app.MapControllers();
 
