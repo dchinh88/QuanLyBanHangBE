@@ -13,6 +13,7 @@ namespace QuanLyBanHang.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "AdminPolicy")]
     public class QLNhanvienController : ControllerBase
     {
         private readonly INhanvienService nhanvienService;

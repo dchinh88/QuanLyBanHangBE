@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
@@ -9,6 +10,7 @@ namespace QuanLyBanHang.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "AdminPolicy")]
     public class QLKhoController : ControllerBase
     {
         private readonly IKhoService khoService;

@@ -24,14 +24,14 @@ namespace QuanLyBanHang.API.Controllers
             this.context = context;
         }
         [HttpGet("GetAllSanpham")]
-        [Authorize(Policy = "AdminPolicy")]
+        /*[Authorize(Policy = "AdminPolicy")]*/
         public IActionResult GetALlSanpham_NoQuery()
         {
             return Ok(sanPhamService.GetAllSanpham_NoQuery());
         }
 
         [HttpGet]
-        [Authorize(Policy = "AdminPolicy")]
+        /*[Authorize(Policy = "AdminPolicy")]*/
         public IActionResult GetAllSanpham([FromQuery] SanphamQuery query)
         {
             return Ok(sanPhamService.GetAllSanpham(query));
@@ -57,6 +57,7 @@ namespace QuanLyBanHang.API.Controllers
             return BadRequest();
         }
         [HttpDelete("{id}")]
+        [Authorize(Policy = "AdminPolicy")]
         public IActionResult XoaSanpham(int id)
         {
             var sanpham = sanPhamService.DeleteSanpham(id);

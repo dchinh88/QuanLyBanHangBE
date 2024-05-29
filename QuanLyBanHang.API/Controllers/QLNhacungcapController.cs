@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
 using QuanLyBanHang.Application.Query;
@@ -7,6 +8,7 @@ namespace QuanLyBanHang.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Policy = "AdminPolicy")]
     public class QLNhacungcapController : ControllerBase
     {
         private readonly INhacungcapService nhacungcapService;
