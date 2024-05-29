@@ -115,5 +115,15 @@ namespace QuanLyBanHang.Application.Services
             }
             return mapper.Map<List<SanphamDTO>>(sanpham);
         }
+
+        public List<SanphamDTO> SortTangDan(List<SanphamDTO> sanphams)
+        {
+            return sanphams.OrderByDescending(p => p.Giaban).ToList();
+        }
+
+        public List<SanphamDTO> SortGiamDan(List<SanphamDTO> sanphams)
+        {
+            return sanphams.OrderBy(p => p.Giaban).ToList();
+        }
     }
 }

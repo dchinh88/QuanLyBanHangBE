@@ -68,6 +68,7 @@ namespace QuanLyBanHang.API.Controllers
             return NotFound();
         }
         [HttpPut("{id}")]
+        [Authorize(Policy = "AdminPolicy")]
         public IActionResult CapnhatSanpham(SanphamDTO sanphamDTO)
         {
             if (!sanPhamService.UpdateSanpham(sanphamDTO))
@@ -109,6 +110,20 @@ namespace QuanLyBanHang.API.Controllers
                 return NotFound();
             }
             return Ok(sanpham);
+        }
+
+        [HttpGet("sortDes")]
+        public IActionResult SortGiamdan()
+        {
+            var sortProducts = context.Sanphams.OrderByDescending(p => p.Giaban).ToList();
+            return Ok(sortProducts);
+        }
+
+        [HttpGet("sortAsc")]
+        public IActionResult SortTangdan()
+        {
+            var sortProducts = context.Sanphams.OrderBy(p => p.Giaban).ToList();
+            return Ok(sortProducts);
         }
     }
 }
