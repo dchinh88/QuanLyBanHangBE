@@ -3,6 +3,7 @@ using QuanLyBanHang.Application.DTO;
 using QuanLyBanHang.Application.Interface;
 using QuanLyBanHang.Application.Query;
 using QuanLyBanHang.Application.Services;
+using QuanLyBanHang.Infrastructure.Context;
 
 namespace QuanLyBanHang.API.Controllers
 {
@@ -11,9 +12,11 @@ namespace QuanLyBanHang.API.Controllers
     public class QLDonhangController : ControllerBase
     {
         private readonly IDonhangService donhangService;
-        public QLDonhangController(IDonhangService donhangService)
+        private readonly QlkinhdoanhContext context;
+        public QLDonhangController(IDonhangService donhangService, QlkinhdoanhContext context)
         {
             this.donhangService = donhangService;
+            this.context = context;
         }
         [HttpGet("GetAllDonhang")]
         public IActionResult GetAllDonhang_NoQuery() 
@@ -62,6 +65,14 @@ namespace QuanLyBanHang.API.Controllers
                 return Ok(donhangDTO);
             }
             return BadRequest();
+        }
+
+        [HttpGet("filterByDate")]
+        public IActionResult GetDonhangByDate(DateTime startDate, DateTime endDate)
+        {
+            var donhangs = donhangService.GetAllDonhang_NoQuery();
+            var filterDonhang = donhangService.FillterDonhangsByDate(donhangs, startDate, endDate);
+            return Ok(filterDonhang);
         }
     }
 }

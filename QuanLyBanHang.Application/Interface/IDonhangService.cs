@@ -17,5 +17,7 @@ namespace QuanLyBanHang.Application.Interface
         bool AddDonhang(DonhangDTO dto);
         bool UpdateDonhang(DonhangDTO dto);
         bool DeleteDonhang(int id);
+
+        List<DonhangDTO> FillterDonhangsByDate(List<DonhangDTO> donhangs, DateTime startDate, DateTime endDate);
     }
 }

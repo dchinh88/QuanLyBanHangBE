@@ -65,5 +65,21 @@ namespace QuanLyBanHang.Application.Services
             dto.deletedAt = null;
             return donhang.Update(mapper.Map<Donhang>(dto));
         }
+
+/*        public List<SanphamDTO> GetSanphamByIdKho(int id)
+        {
+            var sanpham = context.Sanphams.Where(n => n.Khoid == id).ToList();
+            if (sanpham == null)
+            {
+                return null;
+            }
+            return mapper.Map<List<SanphamDTO>>(sanpham);
+        }*/
+
+        public List<DonhangDTO> FillterDonhangsByDate(List<DonhangDTO> donhangs, DateTime startDate, DateTime endDate)
+        {
+            var donhang = donhangs.Where(o => o.Ngaytaodon >= startDate && o.Ngaytaodon <= endDate).ToList();
+            return mapper.Map<List<DonhangDTO>>(donhang);
+        }
     }
 }
